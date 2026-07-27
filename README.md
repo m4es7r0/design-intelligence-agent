@@ -1,5 +1,7 @@
 # Design Intelligence Agent
 
+![validate](https://github.com/m4es7r0/design-intelligence-agent/actions/workflows/validate.yml/badge.svg)
+
 A research-first design system for Claude Code: it resolves the platform, searches live
 sources (official guidelines + real shipped products), scores the evidence, and only then
 makes design decisions — each key decision labeled with evidenceBasis and derivation.

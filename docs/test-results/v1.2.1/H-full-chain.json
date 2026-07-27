@@ -1,0 +1,29 @@
+{
+  "test": "H-full-chain",
+  "prompt": "Prototype mode, полная цепочка: экран «История поисков» RN/Expo — Router → Sufficiency Gate → design-scout (quick, ≤2 поиска) → pattern decision → research_summary → ersatz-design (реальный RN-код) → mobile verification (таксономия) → routingTrace.",
+  "purpose": "Closes the residual coverage gap from v1.2: research → generation → verification in ONE continuous fresh session.",
+  "researchDecision": "run-live-quick",
+  "invokedModules": [
+    "design-scout (quick, 2 searches)",
+    "ersatz-design",
+    "mobile-design-patterns (audit)"
+  ],
+  "skippedModules": [
+    "hallmark",
+    "frontend-design",
+    "coss",
+    "web-platform constraints",
+    "figma skills",
+    "cross-platform-synthesis mode"
+  ],
+  "artifactGenerated": "real RN component code in-response (StyleSheet/export markers present x4)",
+  "verificationFindingsBySeverity": {
+    "Usability risk": 1,
+    "Design-system inconsistency": 2
+  },
+  "severityTaxonomyUsed": true,
+  "routingTrace": "routingTrace:\n  entryPoint: design-agent\n  mode: prototype\n  platformProfile: cross-platform-mobile (ios primary) · confidence: high\n  invokedModules: [design-scout (quick, 2 searches), ersatz-design, mobile-design-patterns (audit)]\n  skippedModules: [hallmark, frontend-design, coss, web-platform constraints, figma skills, cross-platform-synthesis mode]\n  researchDecision: run-live-quick · scouts: 1 · freshness: unknown-at-start, now current",
+  "runner": "claude -p, fresh session, --model sonnet, exit 0",
+  "verdict": "PASS — every stage executed, none skipped; verification used the mandatory severity vocabulary (regression check on the v1.2 scenario-A violation)",
+  "violations": []
+}

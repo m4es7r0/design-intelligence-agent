@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Idempotent installer for the design-intelligence-agent bundle.
 # Default: symlink mode (repo = source of truth). --copy = portable copy mode.
-# --force  = allow replacing an existing REAL file/dir (it is backed up first).
+# --force  = allow replacing an existing REAL file/dir — required in BOTH modes;
+#            the replaced path is backed up first.
 # Re-running is always safe: existing correct symlinks are left untouched.
 set -euo pipefail
 MODE=link; FORCE=0
@@ -28,7 +29,7 @@ install_one() { # $1=src $2=dst
     fi
     mkdir -p "$BACKUP"; mv "$dst" "$BACKUP/"; echo "backed up old symlink: $dst"
   elif [ -e "$dst" ]; then
-    if [ "$MODE" = link ] && [ "$FORCE" -ne 1 ]; then
+    if [ "$FORCE" -ne 1 ]; then
       echo "REFUSING to replace real path $dst — re-run with --force (it will be backed up)"; FAIL=1; return
     fi
     mkdir -p "$BACKUP"; mv "$dst" "$BACKUP/"; echo "backed up: $dst -> $BACKUP/"
