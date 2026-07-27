@@ -1,7 +1,7 @@
 ---
 name: ersatz-design
 description: |
-  Visual synthesis engine (local v2 — supersedes the anthropic-skills copy). Normally invoked BY design-agent after research, with a research_summary. Direct use is for quick isolated components only — and then it must label its decisions SPECULATION. Triggers: generating UI when evidence already exists ("сделай по этим реффам", "generate from the research summary", "у нас есть исследование — собери экран"), or explicitly speculative quick components ("быстро набросай кнопку/карточку, без ресёрча"). For full screens, sites, or flows without prior research — invoke design-agent instead.
+  Visual synthesis engine (local v2 — supersedes the anthropic-skills copy). Normally invoked BY design-agent after research, with a research_summary. Direct use is for quick isolated components only — and then it must label its decisions derivation: SPECULATION. Triggers: generating UI when evidence already exists ("сделай по этим реффам", "generate from the research summary", "у нас есть исследование — собери экран"), or explicitly speculative quick components ("быстро набросай кнопку/карточку, без ресёрча"). For full screens, sites, or flows without prior research — invoke design-agent instead.
 ---
 
 # Ersatz Design (v2)
@@ -23,17 +23,24 @@ existingTokens:      the project's design tokens, if any
 noveltyLevel:        conventional | balanced | experimental
 ```
 
-**Gate: without a research_summary you may proceed ONLY in explicitly labeled SPECULATION
-mode — state "No research input — running as SPECULATION" in the rationale, and never
-silently design from a blank slate.**
+**Gate: without a research_summary you may proceed ONLY in explicitly labeled speculation
+mode — state "No research input — running as derivation: SPECULATION on evidenceBasis:
+MODEL_KNOWLEDGE" in the rationale, and never silently design from a blank slate.**
 
-## Provenance
+## Provenance — two axes
 
-Label every key decision — accent strategy, hierarchy mode, composition, palette, type:
+Label every key decision — accent strategy, hierarchy mode, composition, palette, type —
+on both axes:
 
-- **SOURCE** — seen in a provided reference.
-- **SYNTHESIS** — combined from several provided references.
-- **SPECULATION** — new experimental choice of yours.
+- **evidenceBasis** — where the knowledge came from (may list several): LIVE_SOURCE
+  (live-checked references in the research_summary) / REPOSITORY_SOURCE (project files,
+  tokens) / USER_PROVIDED (user's rules, brand, constraints) / MODEL_KNOWLEDGE (your
+  training data — the fallback basis).
+- **derivation** — how the decision was made: DIRECT (taken as-is from the basis) /
+  SYNTHESIS (combined from several inputs) / SPECULATION (new experimental choice).
+
+The axes never merge: "SYNTHESIS of three LIVE_SOURCE patterns" and "SPECULATION on
+MODEL_KNOWLEDGE" are different claims and must read differently.
 
 ## Separation of concerns
 
@@ -97,9 +104,9 @@ Font: match the project first; otherwise Inter or system stack; serif only when 
 Build a palette of roles, not colors: background, primary text, secondary text, surface,
 accent (+ semantic states). Three surface levels max.
 
-**Accent derivation order: 1) brand/existing tokens; 2) visual references from the
-research_summary; 3) only then taste — and that choice is labeled SPECULATION. No fixed
-mood-to-color mappings.**
+**Accent derivation order: 1) brand/existing tokens (USER_PROVIDED / REPOSITORY_SOURCE);
+2) visual references from the research_summary (LIVE_SOURCE); 3) only then taste — and that
+choice is labeled derivation: SPECULATION. No fixed mood-to-color mappings.**
 
 Contrast passes WCAG for text roles in both themes when both exist.
 
@@ -134,10 +141,10 @@ it's a page.
 Rationale — 3–6 lines, technical:
 
 ```
-Акцент: [element] — [reason] · [SOURCE|SYNTHESIS|SPECULATION]
-Пространство: [key spacing decision] · [label]
-Типографика/палитра: [key choice and where it came from] · [label]
-Нестандартное: [any surprising choice and why] · [label]
+Акцент: [element] — [reason] · [evidenceBasis · derivation]
+Пространство: [key spacing decision] · [evidenceBasis · derivation]
+Типографика/палитра: [key choice and where it came from] · [evidenceBasis · derivation]
+Нестандартное: [any surprising choice and why] · [evidenceBasis · derivation]
 ```
 
 ## Adjustment rules

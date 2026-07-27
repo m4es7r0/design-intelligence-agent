@@ -45,15 +45,27 @@ Platform and mode are auto-detected when omitted — the agent echoes back what 
 - Calling `ersatz-design` directly for a full screen — it will demand a research summary or
   run as labeled SPECULATION; go through `design-agent` instead.
 
-## Labels
+## Labels — two independent axes
 
-Every key decision carries provenance:
+Every key decision carries provenance on two axes that never merge:
 
-- **SOURCE** — seen directly in a cited reference.
-- **SYNTHESIS** — combined from several references.
+**evidenceBasis** — what the knowledge rests on (may list several):
+- **LIVE_SOURCE** — checked live in this session (guideline page, real product screen).
+- **REPOSITORY_SOURCE** — read from your repo (tokens, components, audits).
+- **USER_PROVIDED** — rules, references, or constraints you supplied.
+- **MODEL_KNOWLEDGE** — the model's training data; used in fallback, confidence lowered,
+  needs later verification.
+
+**derivation** — how the conclusion was produced:
+- **DIRECT** — taken as-is from the basis.
+- **SYNTHESIS** — combined from several inputs.
 - **SPECULATION** — new experimental idea, not found shipped anywhere.
-- **MODEL-KNOWLEDGE** — fallback: from the model's training data because live research was
-  unavailable or thin; confidence lowered; needs later verification.
+
+So "SYNTHESIS of three live-checked patterns" and "SPECULATION on top of model knowledge"
+are both expressible without the labels fighting each other.
+
+Diagnostics: add "покажи routingTrace" to any request to see which modules were invoked
+and skipped. Full guide: `docs/USER-GUIDE.md` in the design-intelligence-agent repo.
 
 ## Platform routing
 
@@ -69,4 +81,4 @@ for mobile / Adapts for web / Must not transfer literally.**
 - The web module is basic v1 (an extended web-design-patterns skill is planned).
 - No per-domain knowledge files yet (chat/health/e-commerce grow from real sessions).
 - Research quality depends on live web access — when unavailable, the agent says so and
-  labels output MODEL-KNOWLEDGE instead of inventing sources.
+  labels output `evidenceBasis: MODEL_KNOWLEDGE` instead of inventing sources.

@@ -14,8 +14,11 @@
       designed, not implied.
 - [ ] **Navigation integrity** — every screen reachable and leavable; back behavior correct
       for the platform.
-- [ ] **Provenance labels present** — key decisions carry SOURCE / SYNTHESIS / SPECULATION /
-      MODEL-KNOWLEDGE.
+- [ ] **Provenance present, both axes** — key decisions carry evidenceBasis (LIVE_SOURCE /
+      REPOSITORY_SOURCE / USER_PROVIDED / MODEL_KNOWLEDGE) AND derivation (DIRECT /
+      SYNTHESIS / SPECULATION); the axes are never merged into one label.
+- [ ] **Conflict records complete** — every internal-vs-external conflict resolved in the
+      6-step protocol format (SKILL.md, Step 5), with confidence and required validation.
 - [ ] **Divergence justified** — where the result departs from the chosen references, the
       decision record says why.
 - [ ] **AI-slop scan** — no purple-gradient hero by default, no generic 3-card feature row,

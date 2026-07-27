@@ -1,7 +1,7 @@
 ---
 name: design-agent
 description: |
-  Design Intelligence orchestrator — the primary entry point for any non-trivial design work: finding design references, choosing patterns, exploring directions, auditing designs, running full design cycles and prototyping. Grounds decisions in live research instead of LLM defaults. Use for: "найди реффы/референсы", "как это делают", "какой паттерн тут уместен", "исследуй направления", "спроектируй экран/страницу", "редизайн", "design research", "find references", "what's the current pattern", "explore design directions", "design this screen/page/flow". For non-trivial design work invoke THIS skill, not ersatz-design or mobile-design-patterns directly — it orchestrates them in the right order (research before generation).
+  Design Intelligence orchestrator — the primary entry point for any non-trivial design work: finding design references, choosing patterns, exploring directions, auditing designs, running full design cycles and prototyping. Grounds decisions in live research instead of LLM defaults. Use for: "найди реффы/референсы", "как это делают", "какой паттерн тут уместен", "исследуй направления", "спроектируй экран/страницу", "редизайн", "проведи аудит", "проверь дизайн/экран", "design research", "find references", "what's the current pattern", "explore design directions", "design this screen/page/flow", "audit this design/screen", "review this UI". For non-trivial design work invoke THIS skill, not ersatz-design or mobile-design-patterns directly — it orchestrates them in the right order (research before generation; audits get compared against real implementations).
 ---
 
 # Design Intelligence Agent
@@ -22,10 +22,10 @@ assessments — they never make the final call, and you never delegate it to the
   approved pattern decisions — or in explicitly labeled SPECULATION mode.
 - **In grounded and hybrid modes, evidence-free generation is forbidden.**
 - **In explore mode, speculation is welcome — but every speculative idea is labeled
-  SPECULATION.**
+  `derivation: SPECULATION`.**
 - **Fallback output is never dressed up as research.** If live research failed or was thin,
-  say so and label affected content MODEL-KNOWLEDGE (see references/research-method.md,
-  Fallback protocol).
+  say so and label affected content `evidenceBasis: MODEL_KNOWLEDGE` (see
+  references/research-method.md, Fallback protocol).
 - **Output scales to the ask.** A point question gets a recommendation with a spec, not a
   research report. See "Output scaling" below.
 
@@ -98,9 +98,41 @@ If research comes back thin or the tools fail, apply the Fallback protocol from
 In this thread (not in the scouts): score references on the 7 dimensions (taskFit 25%,
 platformFit 20%, domainFit 15%, evidenceQuality 15%, transferability 10%, freshness 10%,
 visualRelevance 5%), build the pattern matrix, extract anti-patterns, form 2–3 directions
-(safe / balanced / experimental), and write the decision record. Label every key decision:
-**SOURCE** (found in a reference) / **SYNTHESIS** (combined from several) / **SPECULATION**
-(new, experimental) / **MODEL-KNOWLEDGE** (fallback, unverified by live research).
+(safe / balanced / experimental), and write the decision record.
+
+**Provenance — two independent axes on every key decision:**
+
+```
+evidenceBasis: LIVE_SOURCE | REPOSITORY_SOURCE | USER_PROVIDED | MODEL_KNOWLEDGE
+               (what the knowledge rests on; may list several)
+derivation:    DIRECT | SYNTHESIS | SPECULATION
+               (how the conclusion was produced from that basis)
+```
+
+Examples: a pattern taken as-is from a live-checked HIG page →
+`evidenceBasis: LIVE_SOURCE · derivation: DIRECT`. A recommendation combining three
+found patterns with the project's tokens →
+`evidenceBasis: LIVE_SOURCE, USER_PROVIDED · derivation: SYNTHESIS`. A new idea with no
+shipped precedent under fallback → `evidenceBasis: MODEL_KNOWLEDGE · derivation:
+SPECULATION`. The axes never share one enum: basis says where knowledge came from,
+derivation says how the output was made.
+
+**Conflict resolution protocol** — when the internal design system (or a user-provided
+rule) conflicts with an external guideline, evidence, or product pattern, resolve it
+explicitly in this format:
+
+```
+1. Internal rule or design-system constraint
+2. External guideline, evidence, or product pattern (with evidenceBasis)
+3. Scope and reason for the conflict
+4. Selected decision and rationale
+5. Exceptions or platform-specific override
+6. Confidence and required validation
+```
+
+Default: the internal design system wins — but only while it creates no clear usability,
+accessibility, or platform conflict. When it does, the external requirement leads and the
+record says why.
 
 ## Step 6 — Generate (routing)
 
@@ -120,6 +152,21 @@ Run `references/verification.md`: the shared checklist plus the platform-appropr
 (web checklist for web-family work). Mobile results additionally go through
 `mobile-design-patterns` audit mode. Verification runs after synthesis/prototyping — never
 before.
+
+## routingTrace (diagnostic, opt-in)
+
+When the user asks for it (or during system tests), append a compact trace block to the
+output; omit it in normal use:
+
+```yaml
+routingTrace:
+  entryPoint: design-agent
+  mode: <mode>
+  platformProfile: <target · confidence>
+  invokedModules: [design-scout, <platform module>, <generation skills>, verification]
+  skippedModules: [<what was deliberately not used>]
+  research: <live | fallback> · scouts: <n>
+```
 
 ## Output scaling
 

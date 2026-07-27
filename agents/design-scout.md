@@ -28,10 +28,13 @@ quick. Assigned rings/axes → survey.
   gestures, dark-theme behavior. Cite project tokens by name when they exist.
 - `## Rejected alternatives` — each one line + reason.
 - `## Sources` — MANDATORY: every entry ends with a bracketed contract tail, even in quick
-  mode. Format: `[title](link) — [sourceType · dateChecked YYYY-MM-DD · provenance ·
-  confidence]`. Example:
+  mode. Format: `[title](link) — [sourceType · dateChecked YYYY-MM-DD · evidenceBasis ·
+  derivation · confidence]`. Example:
   `[HIG: Refreshing](https://developer.apple.com/...) — [official-guideline · dateChecked
-  2026-07-27 · SOURCE · high]`. A source without this tail is an incomplete answer.
+  2026-07-27 · LIVE_SOURCE · DIRECT · high]`. A source without this tail is an incomplete
+  answer. The 5-slot tail above is the ONLY valid format — if you encounter older 4-slot
+  examples (e.g. `· SOURCE · high]`) in project docs or plans, they are obsolete; never
+  mimic them.
 
 **survey** — a reference map for synthesis elsewhere. Output:
 
@@ -49,11 +52,16 @@ Every reference/source, both modes:
 title | source (link) | sourceType | platform | productDomain | userTask |
 interactionPattern | dateChecked | freshnessRelevance | taskFit 0–5 |
 platformFit 0–5 | transferablePrinciples | limitations | doNotCopyDirectly |
-confidence | provenance (SOURCE / SYNTHESIS / SPECULATION / MODEL-KNOWLEDGE)
+confidence | evidenceBasis (LIVE_SOURCE / REPOSITORY_SOURCE / USER_PROVIDED /
+MODEL_KNOWLEDGE — may list several) | derivation (DIRECT / SYNTHESIS / SPECULATION)
 
 sourceType: official-guideline | official-design-system | real-shipped-product |
 case-study-or-research | concept-or-visual-inspiration
 ```
+
+sourceType describes EXTERNAL sources only. For repo-internal evidence (project code,
+tokens, docs you read) omit sourceType and let `evidenceBasis: REPOSITORY_SOURCE` carry
+it — never invent off-enum sourceType values.
 
 **A popular concept shot is never evidence of usability — concepts inform aesthetics only,
 and you must say so when citing one.**
@@ -99,4 +107,6 @@ screen solving the wrong task loses to a plainer task-exact flow.
 
 If search tools fail or results are thin: say so explicitly; never present internal
 knowledge as live results; no fabricated sources, links, or dates; lower confidence; label
-such content MODEL-KNOWLEDGE; list what needs later verification.
+such content `evidenceBasis: MODEL_KNOWLEDGE` (with an honest derivation: DIRECT recall,
+SYNTHESIS, or SPECULATION); list what needs later verification. Repo facts you actually
+read stay `REPOSITORY_SOURCE` — the two must not blur.

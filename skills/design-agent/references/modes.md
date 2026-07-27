@@ -9,10 +9,11 @@ from the ask and state your inference so it can be corrected.
 - **Ring emphasis:** Rings 1–4 (adjacent products, cross-domain patterns, standards for
   grounding, experimental for stretch). Adjacent industries welcome.
 - **Evidence bar:** low by design — but honesty stays. Every idea that was NOT found as a
-  shipped pattern is labeled `SPECULATION` with the note: "not found as a shipped pattern —
-  agent synthesis from several sources."
+  shipped pattern is labeled `derivation: SPECULATION` with the note: "not found as a
+  shipped pattern — agent synthesis."
 - **Output set:** research framing + 3–5 strongly divergent design directions.
-- **Labeling:** SOURCE/SYNTHESIS where applicable, SPECULATION mandatory elsewhere.
+- **Labeling:** both axes on every direction; `derivation: SPECULATION` mandatory for
+  unshipped ideas, whatever their evidenceBasis.
 
 ## grounded
 
@@ -22,15 +23,17 @@ from the ask and state your inference so it can be corrected.
   No pattern is proposed without evidence. Tier D sources may inform aesthetics only — never
   interaction or structure.
 - **Output set:** research framing + reference map + pattern matrix + decision record.
-- **Labeling:** SOURCE and SYNTHESIS only; anything that would need SPECULATION is omitted
-  or explicitly parked as "unverified idea, out of grounded scope".
+- **Labeling:** evidenceBasis LIVE_SOURCE / REPOSITORY_SOURCE / USER_PROVIDED only, with
+  derivation DIRECT or SYNTHESIS; MODEL_KNOWLEDGE and SPECULATION are out of grounded
+  scope — omitted or explicitly parked as "unverified idea, out of grounded scope".
 
 ## hybrid (default)
 
 - **Goal:** the practical working mode.
 - **Ring emphasis:** Rings 0–4, balanced.
-- **Evidence bar:** ~70–80% of decisions rest on SOURCE/SYNTHESIS; the remaining 20–30% may
-  be SPECULATION, clearly labeled.
+- **Evidence bar:** ~70–80% of decisions rest on LIVE_SOURCE / REPOSITORY_SOURCE /
+  USER_PROVIDED evidence (derivation DIRECT or SYNTHESIS); the remaining 20–30% may be
+  `derivation: SPECULATION`, clearly labeled.
 - **Output set:** scales to the ask (see SKILL.md Output scaling).
 
 ## audit
@@ -79,4 +82,4 @@ from the ask and state your inference so it can be corrected.
   - `Must not transfer literally` — patterns that would break on the other platform, with
     the reason.
 - **Labeling:** per-platform evidence carries its platform tag; shared-core decisions are
-  usually SYNTHESIS.
+  usually `derivation: SYNTHESIS`.

@@ -19,7 +19,8 @@ skills/ersatz-design/           fork v2 — research_summary gate, provenance la
                                 no mood→hex table, pre-codegen gate
 agents/design-scout.md          researcher agent — quick/survey modes, evidence contract,
                                 honest no-research fallback
-docs/                           design spec + implementation plan
+docs/USER-GUIDE.md              полное руководство пользователя (RU)
+docs/                           design spec + implementation plan (v1 snapshots)
 ```
 
 ## Install (on any machine with Claude Code)
@@ -47,8 +48,10 @@ back for override. Details: `skills/design-agent/README.md`.
 - Platform resolves before research; mobile and web references never mix silently.
 - Generation (`ersatz-design`) never runs first and never without a research summary,
   except in labeled SPECULATION mode.
-- Fallback output is labeled MODEL-KNOWLEDGE — never dressed up as live research, never
-  with fabricated links.
+- Fallback output is labeled `evidenceBasis: MODEL_KNOWLEDGE` — never dressed up as live
+  research, never with fabricated links. Provenance is two-axis: evidenceBasis (LIVE_SOURCE /
+  REPOSITORY_SOURCE / USER_PROVIDED / MODEL_KNOWLEDGE) × derivation (DIRECT / SYNTHESIS /
+  SPECULATION).
 
 ## v1 limitations
 

@@ -101,6 +101,7 @@ When web search is unavailable, fails, or returns insufficient evidence:
 2. Never present internal knowledge as live results — no fabricated sources, links, or
    dates.
 3. Lower stated confidence accordingly.
-4. Label affected content `MODEL-KNOWLEDGE` (inference from training data) instead of
-   `SOURCE`.
+4. Label affected content `evidenceBasis: MODEL_KNOWLEDGE` (inference from training data) —
+   never as `LIVE_SOURCE`. The derivation axis stays honest too: recalled fact → `DIRECT`,
+   combined recall → `SYNTHESIS`, new idea → `SPECULATION`.
 5. List concretely what must be verified later, so the research can be re-run.

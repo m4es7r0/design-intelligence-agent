@@ -23,7 +23,9 @@ sourceType: official-guideline | official-design-system | real-shipped-product |
             case-study-or-research | concept-or-visual-inspiration
 platform: <tag> · productDomain: <…> · userTask: <…> · interactionPattern: <…>
 dateChecked: <date> · freshnessRelevance: <high|medium|low>
-taskFit: <0–5> · platformFit: <0–5> · confidence: <…> · provenance: <label>
+taskFit: <0–5> · platformFit: <0–5> · confidence: <…>
+evidenceBasis: LIVE_SOURCE | REPOSITORY_SOURCE | USER_PROVIDED | MODEL_KNOWLEDGE (may list several)
+derivation: DIRECT | SYNTHESIS | SPECULATION
 
 What to take: <transferablePrinciples>
 What NOT to transfer: <doNotCopyDirectly>
@@ -56,7 +58,7 @@ Do not <pattern> here, because <product-specific reason>.
 ```
 <Name> — <safe/platform-familiar | balanced | experimental>
 What it optimizes: <…>
-Key patterns: <…> (with provenance labels)
+Key patterns: <…> (each with evidenceBasis + derivation)
 Risk: <…>
 ```
 

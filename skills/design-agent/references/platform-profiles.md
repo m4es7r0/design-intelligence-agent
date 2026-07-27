@@ -78,7 +78,7 @@ implementation: Next.js App Router / Tailwind CSS
 | Web (any) | WCAG 2.2 + WAI-ARIA APG + relevant web design systems |
 | Enterprise / internal tools | Carbon, Fluent, Atlassian Design System |
 | Shopify-embedded | Polaris |
-| Existing internal design system | **The internal system FIRST, always** — external sources fill its gaps only |
+| Existing internal design system | **Internal system first by default** — but only while it creates no clear usability, accessibility, or platform conflict; on conflict run the 6-step conflict resolution protocol (SKILL.md, Step 5) |
 
 ## Cross-platform mapping
 
