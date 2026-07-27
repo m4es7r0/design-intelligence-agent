@@ -1,6 +1,7 @@
 ---
 name: mobile-design-patterns
-description: Mobile app UI design patterns — the mobile assessment/build stage of the design system (local v2 — supersedes the anthropic-skills copy; contextual rules, not absolutes). Normally invoked BY design-agent (its audit mode and mobile generation routing). Invoke directly ONLY for a micro-check of a single bounded element ("это правило 44px?", "какой severity у этого отступа?", quick sheet-anatomy question) — for audits, reviews, redesigns, and new screens ("проведи аудит", "проверь дизайн", "review my app design", "design a mobile screen") start with design-agent, which runs this skill as a stage and compares against real implementations. Covers mobile navigation, bottom sheets, empty states, keyboard states, tap targets for RN / Flutter / SwiftUI / Compose and phone-sized Figma frames (~390px).
+description: |
+  Mobile app UI design patterns — the mobile assessment/build stage of the design system (local v2; the "supersedes the anthropic-skills copy" note is descriptive — disable the plugin copy via plugin management if duplicates fire). Normally invoked BY design-agent (its audit mode and mobile generation routing). Invoke directly ONLY for a micro-check of a single bounded element ("это правило 44px?", "какой severity у этого отступа?", quick sheet-anatomy question) — for audits, reviews, redesigns, and new screens ("проведи аудит", "проверь дизайн", "review my app design", "design a mobile screen") start with design-agent, which runs this skill as a stage and compares against real implementations. Covers mobile navigation, bottom sheets, empty states, keyboard states, tap targets for RN / Flutter / SwiftUI / Compose and phone-sized Figma frames (~390px).
 ---
 
 # Mobile Design Patterns
@@ -16,27 +17,37 @@ drive the full design workflow — `design-agent` does; for full redesigns start
 ## Strong defaults (evidence-backed)
 
 ### Tap targets
-**Prefer** ≥44px effective hit area (44pt iOS / 48dp Android) in at least one dimension for
-every interactive element; visuals may be smaller if the hit area is padded.
+**Prefer** ≥44×44pt (iOS) / ≥48×48dp (Android) effective hit area — **both dimensions** —
+for every interactive element; visuals may be smaller if the hit area is padded (hitSlop /
+minimumHitTarget / contentShape).
 **Scope:** all mobile. **Evidence:** HIG, M3 (platform rule). **Confidence:** high.
-**Exceptions:** none worth having.
+**Severity calibration:** below 24×24 also breaches WCAG 2.2 AA (SC 2.5.8) → Standard
+violation; between 24 and the platform norm → Platform convention conflict or Usability
+risk by context (frequency of the control, audience, density needs).
 
 ### Keyboard is a layout state
-**Prefer** designing every input screen with the keyboard open (~300–336px on iPhone): what
-stays visible, what the accessory bar holds.
+**Prefer** designing every input screen with the keyboard open: what stays visible, what
+the accessory bar holds. The ~300–336px iPhone keyboard height is a **test fixture**, not
+a universal law — actual height varies by device, locale, and accessory bars; measure on
+the target device.
 **Scope:** any screen with input. **Evidence:** shipped products across categories
 (usability heuristic). **Confidence:** high.
 
-### One scroll direction per section
-**Prefer** each section extending in exactly one direction — vertical stack OR horizontal
-carousel, never a 2D grid-of-modules inside one section.
-**Scope:** consumer mobile. **Evidence:** usability heuristic from mobile reading patterns.
-**Confidence:** high. **Exceptions:** data-dense professional tools (trading, dashboards)
-where 2D scanning is the job.
+### No conflicting nested scrolls
+**Prefer** one clear scroll/pan direction per gesture surface. **Static multi-column grids
+are fine** (photo grids, card grids) — what breaks is *conflicting nested scrolling/panning*
+(a horizontal pan area inside a vertical scroller fighting the same gesture, scrollers
+inside scrollers on the same axis).
+**Scope:** consumer mobile. **Evidence:** usability heuristic from gesture conflicts.
+**Confidence:** high. **Exceptions:** deliberate, well-signposted carousels inside a
+vertical page; data-dense professional tools where 2D scanning is the job.
 
 ### Type not smaller than desktop
-**Prefer** body ≥16px (iOS base is 17px), nothing below 10px; don't shrink text to fit more.
-**Scope:** all mobile. **Evidence:** HIG type scale (platform rule). **Confidence:** high.
+**Prefer** mobile type at or above desktop sizes; iOS body base is 17px (platform fact).
+The "body ≥16 / floor 10" numbers are **heuristics for flagging, not laws** — honor
+Dynamic Type / user font scaling, and judge captions by legibility in context.
+**Scope:** all mobile. **Evidence:** HIG type scale (platform rule + heuristic values).
+**Confidence:** high for the direction, medium for exact cutoffs.
 
 ### Empty states, two kinds
 **Prefer** distinct first-run (illustration + one-line title + short explanation + primary
@@ -94,7 +105,9 @@ compose several jobs.
 **Evidence:** usability heuristic. **Confidence:** medium.
 
 ### Long-press peek / context menu
-**Fits when:** collections of content items; needs a discoverability hint once.
+**Fits when:** collections of content items; needs a discoverability hint once. **Any
+important action reachable by long-press must also have a visible path** (row action,
+toolbar, detail screen) — long-press is an accelerator, never the only door.
 **Evidence:** iOS context menus (platform rule on iOS, convention on Android).
 **Confidence:** medium.
 
@@ -139,8 +152,10 @@ Visual polish.
 
 Work in order — each step constrains the next:
 
-1. **Nav model** — count top-level peer destinations; ≤4 → tab bar (pill+FAB only if the
-   candidate pattern fits); >4 → consider nav-as-homepage. Name the primary action.
+1. **Nav model** — count top-level peer destinations and weigh switching frequency,
+   product type, and platform convention. A few peer destinations usually favor a tab bar;
+   many favor nav-as-homepage or hierarchy — these are heuristics, not a deterministic
+   count rule. Name the primary action.
 2. **Screen inventory** — screens + modal sheets; which actions are contextual per screen.
 3. **Per-screen layout** — one scroll direction per section; one hero block for home;
    watch card nesting.

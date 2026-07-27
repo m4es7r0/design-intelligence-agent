@@ -64,6 +64,11 @@ Every key decision carries provenance on two axes that never merge:
 So "SYNTHESIS of three live-checked patterns" and "SPECULATION on top of model knowledge"
 are both expressible without the labels fighting each other.
 
+Before searching, the agent runs a **Research Sufficiency Gate** and echoes its decision
+(`researchDecision: reuse-existing | use-user-provided | use-repository-evidence |
+run-live-quick | run-live-survey | fallback-no-live-research` + reason + freshness) — live
+search runs only when evidence actually requires it.
+
 Diagnostics: add "покажи routingTrace" to any request to see which modules were invoked
 and skipped. Full guide: `docs/USER-GUIDE.md` in the design-intelligence-agent repo.
 
@@ -75,10 +80,28 @@ its assumption if it had to guess. Mobile and web references are never silently 
 cross-platform-synthesis mode the output is split into four buckets: **Stays shared / Adapts
 for mobile / Adapts for web / Must not transfer literally.**
 
-## Limitations (v1)
+## Core vs optional dependencies
+
+**Core (no extra tooling needed):** WebSearch/WebFetch research, repository reading,
+markdown deliverables (reference maps, specs, decision records), code output in your stack.
+
+**Optional enhancements, each with a fallback:**
+- Claude Browser MCP — visual inspection of screen libraries; fallback: search/fetch-only
+  research (scout says so and freshness/visual confidence drops).
+- Figma MCP + figma skills — Figma deliverables; fallback: markdown prototype spec.
+- Expo / mobile builder skills — RN implementation; fallback: code written to project
+  conventions without builder scaffolding.
+- Web builder skills (hallmark, frontend-design, coss) — web polish; fallback:
+  ersatz-design output alone.
+- Refero/Mobbin MCP — not integrated; free screen libraries are the default.
+
+## Limitations (v1.2)
 
 - Free sources only — no Refero/Mobbin paid integrations.
-- The web module is basic v1 (an extended web-design-patterns skill is planned).
+- The web module is basic (an extended web-design-patterns skill is planned).
 - No per-domain knowledge files yet (chat/health/e-commerce grow from real sessions).
 - Research quality depends on live web access — when unavailable, the agent says so and
   labels output `evidenceBasis: MODEL_KNOWLEDGE` instead of inventing sources.
+- "Supersedes the anthropic-skills copy" in fork descriptions is descriptive only — if a
+  plugin copy double-fires in some session type, disable it via plugin management.
+- Video is not analyzed directly — provide frames/screenshots.

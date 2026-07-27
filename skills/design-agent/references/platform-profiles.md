@@ -18,7 +18,7 @@ is active** — and even then, research stays per-platform until the synthesis s
 
 | Signal | Resolution |
 |---|---|
-| React Native / Expo code | cross-platform-mobile (primary ios unless stated) |
+| React Native / Expo code | cross-platform-mobile; primary inferred from project evidence (platform-pair files, docs, handoffs, store config) — otherwise primary: unresolved (treat platforms as equal and say so). A standing iOS-first preference belongs in the project's CLAUDE.md, not here |
 | SwiftUI code | ios |
 | Jetpack Compose code | android |
 | Next.js / Tailwind / Vite web code | responsive-web, or desktop-web if density is high |

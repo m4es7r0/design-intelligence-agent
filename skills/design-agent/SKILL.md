@@ -1,7 +1,7 @@
 ---
 name: design-agent
 description: |
-  Design Intelligence orchestrator — the primary entry point for any non-trivial design work: finding design references, choosing patterns, exploring directions, auditing designs, running full design cycles and prototyping. Grounds decisions in live research instead of LLM defaults. Use for: "найди реффы/референсы", "как это делают", "какой паттерн тут уместен", "исследуй направления", "спроектируй экран/страницу", "редизайн", "проведи аудит", "проверь дизайн/экран", "design research", "find references", "what's the current pattern", "explore design directions", "design this screen/page/flow", "audit this design/screen", "review this UI". For non-trivial design work invoke THIS skill, not ersatz-design or mobile-design-patterns directly — it orchestrates them in the right order (research before generation; audits get compared against real implementations).
+  Design Intelligence orchestrator — the primary entry point for any non-trivial design work: finding design references, choosing patterns, exploring directions, auditing designs, running full design cycles and prototyping. Grounds decisions in live research instead of LLM defaults. Use for: "найди реффы/референсы", "как это делают", "какой паттерн тут уместен", "исследуй направления", "спроектируй экран/страницу", "сделай экран/страницу", "собери экран", "редизайн", "проведи аудит", "проверь дизайн/экран", "design research", "make/build a screen or page", "find references", "what's the current pattern", "explore design directions", "design this screen/page/flow", "audit this design/screen", "review this UI". For non-trivial design work invoke THIS skill, not ersatz-design or mobile-design-patterns directly — it orchestrates them in the right order (research before generation; audits get compared against real implementations).
 ---
 
 # Design Intelligence Agent
@@ -81,8 +81,23 @@ The user can name a mode; otherwise infer it from the ask and state your choice.
 
 ## Step 4 — Research
 
-Formulate search axes and rings per `references/research-method.md`, then dispatch the
-`design-scout` agent (Agent tool):
+**Research Sufficiency Gate — decide BEFORE any live research and echo the decision:**
+
+```
+researchDecision: reuse-existing | use-user-provided | use-repository-evidence |
+                  run-live-quick | run-live-survey | fallback-no-live-research
+reason:           one line — why this level of evidence is sufficient
+freshness:        current | stale | unknown  (age/validity of evidence being reused)
+```
+
+Order of preference: a current prior research_summary → user-provided references and rules →
+repository evidence (tokens, components, audits) → live research. Live search runs only
+when freshness, external verification, or missing evidence requires it. In prototype mode
+with an approved, current direction, do NOT re-run research automatically.
+
+When live research is needed, formulate search axes and rings per
+`references/research-method.md`, then dispatch the `design-scout` agent (Agent tool) with
+the resolved PlatformProfile and DesignContext:
 
 - Point question → **1 scout, `mode: quick`** in the prompt.
 - Broad research → **2–3 parallel scouts, `mode: survey`**, split by ring or by axis.
@@ -125,9 +140,10 @@ explicitly in this format:
 1. Internal rule or design-system constraint
 2. External guideline, evidence, or product pattern (with evidenceBasis)
 3. Scope and reason for the conflict
-4. Selected decision and rationale
-5. Exceptions or platform-specific override
-6. Confidence and required validation
+4. User impact of each choice
+5. Selected decision and rationale
+6. Exceptions or platform-specific override
+7. Confidence and required validation
 ```
 
 Default: the internal design system wins — but only while it creates no clear usability,
@@ -165,7 +181,7 @@ routingTrace:
   platformProfile: <target · confidence>
   invokedModules: [design-scout, <platform module>, <generation skills>, verification]
   skippedModules: [<what was deliberately not used>]
-  research: <live | fallback> · scouts: <n>
+  researchDecision: <gate decision> · scouts: <n> · freshness: <status>
 ```
 
 ## Output scaling

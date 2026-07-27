@@ -5,12 +5,15 @@ Source of truth: https://m3.material.io
 ## System back & predictive back
 - System back (gesture or button) must always work — never swallowed by modals, custom
   navigators, or WebViews without proper back-stack entries.
-- Predictive back (Android 14+): the app should opt in; screens peek the destination during
-  the gesture. Custom back handling that blocks the preview reads as broken.
+- Predictive back timeline: introduced in Android 13 as a developer option, per-app opt-in
+  from Android 14, system back-to-home animation default from Android 15 (apps still opt in
+  via `enableOnBackInvokedCallback`). Screens peek the destination during the gesture;
+  custom back handling that blocks the preview reads as broken.
 
 ## Edge-to-edge & insets
-- Edge-to-edge is the default expectation on modern Android: draw behind system bars and
-  apply WindowInsets to keep controls out of the gesture/status zones.
+- Edge-to-edge is enforced when targeting SDK 35 (Android 15): apps draw behind system bars
+  whether they planned to or not. On lower targets it is opt-in but expected on modern
+  Android. Either way: apply WindowInsets to keep controls out of the gesture/status zones.
 - Bottom navigation must pad for the gesture nav bar; content scrolls under, controls don't.
 
 ## Navigation
@@ -28,7 +31,10 @@ Source of truth: https://m3.material.io
 - Dynamic color (Material You) may recolor your palette — pin brand-critical colors
   explicitly if they must not shift.
 
-## RN quirks (from project memory)
+## RN quirks
+
+> basis: REPOSITORY_SOURCE (this user's project audits/memory) — verify against the current
+> RN version before citing as general fact.
 - Edge-to-edge on RN can leave transparent system-bar zones that swallow taps — verify
   bottom-zone touchables on device.
 - Compose Text inside RN hybrid trees measures differently — check truncation.

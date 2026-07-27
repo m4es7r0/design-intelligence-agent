@@ -49,7 +49,9 @@ from the ask and state your inference so it can be corrected.
   4. Report findings using the severity taxonomy (Standard violation / Platform convention
      conflict / Usability risk / Design-system inconsistency / Visual polish / Subjective
      preference) and the rule-type check (platform rule / usability heuristic / product
-     convention / visual preference).
+     convention / visual preference). **The taxonomy is mandatory vocabulary even under
+     micro-budgets** — applying rules inline without loading the platform skill never
+     changes the output format; generic labels like HIGH/MEDIUM are a contract violation.
   5. Give a fix order: quick wins first, then structural.
 - **Labeling:** findings cite numbers and elements; taste is allowed but lands in
   `Subjective preference`, never higher.
@@ -58,7 +60,8 @@ from the ask and state your inference so it can be corrected.
 
 - **Goal:** turn an approved direction into a specified, built, verified artifact.
 - **Precondition:** an approved direction exists — from a prior mode run or an explicit user
-  choice. No direction → run hybrid first.
+  choice. No direction → run hybrid first. With an approved, current direction the
+  Sufficiency Gate answers `reuse-existing` — do NOT re-run research automatically.
 - **Produces:** screen structure, component inventory, token map, states inventory, motion,
   gestures/interaction spec, a11y constraints, acceptance criteria — then routes to builder
   skills (expo/RN for native, hallmark/frontend-design/coss for web, figma skills for Figma).

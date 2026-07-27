@@ -14,23 +14,28 @@ Subjective preference.
       pattern fits the app [Visual polish]
 - [ ] If >5 top-level destinations existed, nav-as-homepage was considered [Platform
       convention conflict]
-- [ ] All tap targets ≥44px effective hit area — nav items, icon buttons, list rows, close
-      buttons [Usability risk]
+- [ ] All tap targets meet the platform hit area in BOTH dimensions — 44×44pt iOS /
+      48×48dp Android — nav items, icon buttons, list rows, close buttons. Below 24×24 is
+      also a WCAG 2.2 AA breach (SC 2.5.8) [Standard violation if <24×24; else Usability
+      risk or Platform convention conflict by context]
 - [ ] Top bar actions contextual per screen, not a frozen global set [Visual polish]
 - [ ] Back affordance on every non-root screen (button and/or swipe; Android system back
       works) [Platform convention conflict]
 
 ## Typography — rule type: platform rule / usability heuristic
-- [ ] Body text ≥16px (iOS base 17) — mobile type not smaller than desktop [Platform
-      convention conflict]
-- [ ] Nothing below 10px; captions ≥12px preferred [Usability risk]
+- [ ] Body text ≥16px (iOS base 17) — mobile type not smaller than desktop; heuristic
+      cutoff, honor Dynamic Type [Platform convention conflict]
+- [ ] Nothing below 10px; captions ≥12px preferred — heuristic cutoffs for flagging, judge
+      legibility in context [Usability risk]
 - [ ] ≤6 distinct sizes per screen; consistent role scale across screens [Design-system
       inconsistency]
 - [ ] Line heights breathe (~1.3× size); text not squished to fit more [Visual polish]
 
 ## Layout — rule type: usability heuristic
-- [ ] Every section scrolls in exactly ONE direction — no desktop-style 2D module grids
-      (exception: data-dense pro tools, stated in Context) [Usability risk]
+- [ ] No conflicting nested scrolls/pans — one clear gesture direction per surface; static
+      multi-column grids are fine, scroller-inside-scroller on the same axis or fighting
+      pan areas are not (exception: data-dense pro tools, stated in Context) [Usability
+      risk]
 - [ ] Screen isn't a shrunken desktop: one hero block, not five competing modules
       [Usability risk]
 - [ ] 4pt-family spacing; screen edge margins consistent [Visual polish]

@@ -1,7 +1,7 @@
 ---
 name: ersatz-design
 description: |
-  Visual synthesis engine (local v2 — supersedes the anthropic-skills copy). Normally invoked BY design-agent after research, with a research_summary. Direct use is for quick isolated components only — and then it must label its decisions derivation: SPECULATION. Triggers: generating UI when evidence already exists ("сделай по этим реффам", "generate from the research summary", "у нас есть исследование — собери экран"), or explicitly speculative quick components ("быстро набросай кнопку/карточку, без ресёрча"). For full screens, sites, or flows without prior research — invoke design-agent instead.
+  Visual synthesis engine (local v2; the "supersedes the anthropic-skills copy" note is descriptive — disable the plugin copy via plugin management if duplicates fire). Normally invoked BY design-agent after research, with a research_summary. Direct use is for quick isolated components only — and then it must label its decisions derivation: SPECULATION. Triggers: generating UI when evidence already exists ("сделай по этим реффам", "generate from the research summary", "у нас есть исследование — собери экран"), or explicitly speculative quick components ("быстро набросай кнопку/карточку, без ресёрча"). For full screens, sites, or flows without prior research — invoke design-agent instead.
 ---
 
 # Ersatz Design (v2)

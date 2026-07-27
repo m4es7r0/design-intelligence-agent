@@ -18,7 +18,11 @@
       REPOSITORY_SOURCE / USER_PROVIDED / MODEL_KNOWLEDGE) AND derivation (DIRECT /
       SYNTHESIS / SPECULATION); the axes are never merged into one label.
 - [ ] **Conflict records complete** — every internal-vs-external conflict resolved in the
-      6-step protocol format (SKILL.md, Step 5), with confidence and required validation.
+      7-step protocol format (SKILL.md, Step 5), including user impact of each choice,
+      confidence, and required validation.
+- [ ] **No false precision** — every exact value is measured, sourced, token-based, or
+      transparently derived; anything else is a range with confidence and a validation
+      requirement.
 - [ ] **Divergence justified** — where the result departs from the chosen references, the
       decision record says why.
 - [ ] **AI-slop scan** — no purple-gradient hero by default, no generic 3-card feature row,
