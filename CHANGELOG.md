@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+- Cursor / Codex install instructions (README + USER-GUIDE §16): shared `~/.agents/skills`
+  symlink install, Cursor's `~/.claude/skills` backward-compat note, Codex AGENTS.md
+  routing snippet; mechanisms verified against official docs 2026-07-27, field behavior
+  untested. design-agent SKILL.md gains a harness-portability fallback: with no subagent
+  tool, the design-scout method runs inline (same contract).
+- Quick-test demo prompt added to README and USER-GUIDE (full
+  repository → routing → audit → research → synthesis → prototype → verification chain).
+
 ## v1.2.1 — 2026-07-27
 
 Consistency pass after GitHub-side review of v1.2; no architecture changes.

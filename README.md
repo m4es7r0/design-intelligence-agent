@@ -51,6 +51,42 @@ mkdir -p ~/.claude/agents && cp agents/design-scout.md ~/.claude/agents/
 Either way, new Claude Code sessions list `design-agent`, both forked skills, and the
 `design-scout` agent automatically. Run `./scripts/validate.sh` before committing changes.
 
+## Install in Cursor / Codex (experimental)
+
+SKILL.md is an open standard both tools read. Mechanisms below verified against official
+docs on 2026-07-27; the bundle's *behavior* on these platforms is not yet field-tested.
+
+**Shared install (covers both):** both Cursor and Codex auto-discover `~/.agents/skills`:
+
+```bash
+REPO="$(pwd)" && mkdir -p ~/.agents/skills \
+  && ln -s "$REPO/skills/design-agent" ~/.agents/skills/design-agent \
+  && ln -s "$REPO/skills/mobile-design-patterns" ~/.agents/skills/mobile-design-patterns \
+  && ln -s "$REPO/skills/ersatz-design" ~/.agents/skills/ersatz-design
+```
+
+**Cursor:** also reads `~/.claude/skills` for backward compatibility — if you installed for
+Claude Code on the same machine, Cursor already sees the system. Invoke manually with
+`/design-agent` in Agent chat, or let auto-discovery match the description. Optional: build
+a research subagent from `agents/design-scout.md` via Cursor's `/create-subagent`.
+
+**Codex CLI:** skills load from `~/.agents/skills` (global) or `.agents/skills` (repo);
+invoke by name or let Codex pick it implicitly. Add a routing rule to `~/.codex/AGENTS.md`
+(global) or the repo's `AGENTS.md`:
+
+```
+For any non-trivial design work (references, patterns, audits, new screens), use the
+design-agent skill and follow its workflow. It has no subagent tool here: execute
+agents/design-scout.md from the design-intelligence-agent repo inline as the research
+stage. Never run ersatz-design before a research_summary exists.
+```
+
+**Degradations to expect outside Claude Code:** no isolated design-scout subagent (the
+skill falls back to running the scout method inline — built in), auto-triggering depends on
+each tool's description matching, and web research depends on the tool's browsing/search
+capability — the honest-fallback protocol (`evidenceBasis: MODEL_KNOWLEDGE`) covers the
+gap when search is unavailable.
+
 ## Use
 
 Write design asks normally — «найди как делают X», «исследуй направления Y»,

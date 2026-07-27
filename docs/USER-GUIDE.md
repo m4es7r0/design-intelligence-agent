@@ -486,3 +486,43 @@ design-scout читает внешние страницы, поэтому в е�
   дублирует срабатывание в каком-то типе сессий, отключите её через управление плагинами.
 - Frontmatter всех скиллов и агентов проверяется скриптом `scripts/validate.sh`
   (настоящий YAML-парсер + обязательные поля + существование reference-путей).
+
+## 16. Установка в Cursor и Codex (экспериментально)
+
+SKILL.md — открытый стандарт, оба инструмента его читают. Механизмы ниже сверены с
+официальной документацией 2026-07-27 (`evidenceBasis: LIVE_SOURCE`); **поведение системы
+на этих платформах в бою пока не проверялось** — честно считайте это первым полевым
+тестом.
+
+**Общая установка (покрывает оба инструмента).** И Cursor, и Codex автоматически
+обнаруживают скиллы в `~/.agents/skills`:
+
+```bash
+REPO="$(pwd)" && mkdir -p ~/.agents/skills \
+  && ln -s "$REPO/skills/design-agent" ~/.agents/skills/design-agent \
+  && ln -s "$REPO/skills/mobile-design-patterns" ~/.agents/skills/mobile-design-patterns \
+  && ln -s "$REPO/skills/ersatz-design" ~/.agents/skills/ersatz-design
+```
+
+**Cursor.** Дополнительно читает `~/.claude/skills` (обратная совместимость) — если
+система уже установлена для Claude Code на этой машине, Cursor видит её без каких-либо
+действий. Ручной вызов: `/design-agent` в чате агента; автосрабатывание — по description.
+Опционально: создайте research-сабагента из `agents/design-scout.md` встроенным скиллом
+`/create-subagent`.
+
+**Codex CLI.** Скиллы: `~/.agents/skills` (глобально) или `.agents/skills` в репозитории
+проекта; вызов по имени или неявно по совпадению описания. Правило маршрутизации добавьте
+в `~/.codex/AGENTS.md` (глобально) или в `AGENTS.md` проекта:
+
+```
+For any non-trivial design work (references, patterns, audits, new screens), use the
+design-agent skill and follow its workflow. It has no subagent tool here: execute
+agents/design-scout.md from the design-intelligence-agent repo inline as the research
+stage. Never run ersatz-design before a research_summary exists.
+```
+
+**Ожидаемые деградации вне Claude Code:** нет изолированного сабагента design-scout —
+скилл встроенно переключается на инлайн-исполнение метода скаута (та же evidence-цепочка);
+автотриггер зависит от матчинга описаний конкретным инструментом; live-ресёрч зависит от
+поисковых возможностей инструмента — при их отсутствии срабатывает честный fallback с
+`evidenceBasis: MODEL_KNOWLEDGE`.

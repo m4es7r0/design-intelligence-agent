@@ -105,6 +105,12 @@ the resolved PlatformProfile and DesignContext:
 
 Give each scout: the platform profile, the context brief, its assigned rings/axes, and the
 platform-appropriate official sources from the source routing table. Free sources only.
+
+Harness portability: if the current environment has no subagent dispatch tool (e.g. Cursor
+or Codex running this skill), read `agents/design-scout.md` from this bundle's repo and
+execute its method INLINE as the research stage — same contract, same evidence tails, no
+skipped gate.
+
 If research comes back thin or the tools fail, apply the Fallback protocol from
 `references/research-method.md` — honestly, visibly, with lowered confidence.
 
