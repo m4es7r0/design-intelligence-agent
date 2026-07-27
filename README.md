@@ -25,15 +25,29 @@ docs/                           design spec + implementation plan (v1 snapshots)
 
 ## Install (on any machine with Claude Code)
 
-Copy the pieces into the user-level Claude Code directories:
+**Symlink mode (recommended — this repo stays the single source of truth; verified to work
+with Claude Code skill/agent discovery):**
+
+```bash
+REPO="$(pwd)" && mkdir -p ~/.claude/skills ~/.claude/agents \
+  && ln -s "$REPO/skills/design-agent" ~/.claude/skills/design-agent \
+  && ln -s "$REPO/skills/mobile-design-patterns" ~/.claude/skills/mobile-design-patterns \
+  && ln -s "$REPO/skills/ersatz-design" ~/.claude/skills/ersatz-design \
+  && ln -s "$REPO/agents/design-scout.md" ~/.claude/agents/design-scout.md
+```
+
+Edits made in the repo are live immediately for new sessions; commit them here — no
+copy-back step exists anymore.
+
+**Copy mode (portable, no repo left on the machine):**
 
 ```bash
 cp -R skills/design-agent skills/mobile-design-patterns skills/ersatz-design ~/.claude/skills/
 mkdir -p ~/.claude/agents && cp agents/design-scout.md ~/.claude/agents/
 ```
 
-New Claude Code sessions will list `design-agent`, both forked skills, and the
-`design-scout` agent automatically.
+Either way, new Claude Code sessions list `design-agent`, both forked skills, and the
+`design-scout` agent automatically. Run `./scripts/validate.sh` before committing changes.
 
 ## Use
 
