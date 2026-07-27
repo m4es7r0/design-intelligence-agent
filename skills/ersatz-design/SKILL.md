@@ -125,8 +125,9 @@ Before writing any code, ALL of these exist — produce any missing one first:
   on mobile) where applicable.
 - **Component inventory** — every component, reused vs new.
 - **Token map** — named tokens for color/type/spacing/radii; no magic numbers.
-- **Interaction spec** — from approvedPatterns; transitions ≤0.25s micro, reduced-motion
-  behavior.
+- **Interaction spec** — from approvedPatterns; micro-interaction durations derived from
+  platform conventions or existing tokens — otherwise give a test range and validate
+  perceived responsiveness; reduced-motion behavior defined.
 - **A11y constraints** — contrast, focus visibility, labels, target sizes.
 
 ## Generate

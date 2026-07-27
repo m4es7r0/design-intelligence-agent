@@ -1,0 +1,17 @@
+{
+  "test": "F-fallback",
+  "prompt": "Grounded: first-run empty state для iOS заметок; WebSearch/WebFetch недоступны — fallback-протокол; routingTrace + researchDecision.",
+  "expected": "fallback-no-live-research; MODEL_KNOWLEDGE labels; zero fabricated links",
+  "researchDecision": "fallback-no-live-research",
+  "routingTrace": "routingTrace:\n  entryPoint: design-agent\n  mode: grounded\n  platformProfile: ios · phone · confidence high\n  invokedModules: [mobile-design-patterns(reference only, no live audit)]\n  skippedModules: [design-scout (WebSearch/WebFetch unavailable), ersatz-design (point question, no generation requested)]\n  researchDecision: fallback-no-live-research · scouts: 0 · freshness: unknown\n\nresearchDecision: fallback-no-live-research\nreason: live research tools declared unavailable per test condition; no reusable prior evidence\nfreshness: unknown",
+  "provenanceLabelsObserved": {
+    "MODEL_KNOWLEDGE": 2,
+    "DIRECT": 1,
+    "SYNTHESIS": 1
+  },
+  "verdict": "PASS",
+  "violations": [],
+  "notes": "0 http links in output; grounded degradation declared; freshness: unknown; reason recorded.",
+  "runner": "claude -p, fresh session, --model sonnet",
+  "resultStatus": "completed (non-empty output; runner exit codes lost to a launcher bug — see SUMMARY)"
+}

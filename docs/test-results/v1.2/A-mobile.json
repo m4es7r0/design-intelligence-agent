@@ -1,0 +1,18 @@
+{
+  "test": "A-mobile",
+  "prompt": "Аудит экранов поиска/деталей RN/Expo: клавиатура, safe area, iOS/Android back, длинный скролл; без веб-поиска; ≤3 находки; routingTrace.",
+  "expected": "mobile profile; use-repository-evidence; mobile rules; findings with numbers",
+  "researchDecision": "use-repository-evidence",
+  "routingTrace": "routingTrace:\n  entryPoint: design-agent\n  mode: audit\n  platformProfile: cross-platform-mobile (ios · android) · confidence: high\n  invokedModules: [platform-router, context-interpreter, repo-evidence-read]\n  skippedModules: [design-scout (live research — запрещено бюджетом), mobile-design-patterns audit checklist (не вызывался отдельно — правила применены инлайн из-за микро-бюджета), ersatz-design, generation]\n  researchDecision: use-repository-evidence · scouts: 0 · freshness: current",
+  "provenanceLabelsObserved": {
+    "REPOSITORY_SOURCE": 3,
+    "DIRECT": 3
+  },
+  "verdict": "PASS with 1 contract violation",
+  "violations": [
+    "Findings used HIGH instead of the severity taxonomy (session applied rules inline under micro-budget, skipping the fork's report format). Fix shipped: taxonomy declared mandatory vocabulary in modes.md audit protocol."
+  ],
+  "notes": "Found 3 real project bugs: swipe-back disabled on detail (ZoomIn preset default), predictiveBackGestureEnabled:false, iOS back button scrolls away inside ScrollView (Android appBar fixed).",
+  "runner": "claude -p, fresh session, --model sonnet",
+  "resultStatus": "completed (non-empty output; runner exit codes lost to a launcher bug — see SUMMARY)"
+}

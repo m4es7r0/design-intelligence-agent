@@ -1,5 +1,33 @@
 # Changelog
 
+## v1.2.1 — 2026-07-27
+
+Consistency pass after GitHub-side review of v1.2; no architecture changes.
+
+- **audit-checklist.md rewritten as contextual guidance**: applicability questions first;
+  severity calibrated by observed impact, never by count dogma; removed FAB-as-requirement,
+  nav-item-count severities, "one hero block", universal bottom-sheet mandate,
+  long-press-as-requirement, back-swipe-parallax expectation, illustration-in-empty-state;
+  typography cutoffs demoted to flagging heuristics requiring an impact statement.
+- **WCAG corrected in three files**: 200% zoom = Resize Text (1.4.4); Reflow (1.4.10) =
+  no 2D scrolling at 320 CSS px equivalent width; `browser-zoom-200` split into
+  `text-resize-200` + `reflow-320-css-px`.
+- **Verification demands applicable states**, per control and per screen/flow — not every
+  state everywhere; shared states-coverage item likewise scoped.
+- **6-step → 7-step** conflict-protocol reference fixed in platform-profiles; cross-platform
+  mapping table reframed as common tendencies, not universal answers.
+- **Root README**: intro provenance wording moved to the two-axis vocabulary; limitations
+  heading versioned.
+- **Idempotent `scripts/install.sh` / `uninstall.sh`** (repo-root check, backups, refusal
+  to silently replace real paths, `--copy` portable mode, post-install validation).
+- **Test evidence published**: `docs/test-results/v1.2/` (per-test JSON extracts +
+  SUMMARY.md incl. honest caveats); CI added (`.github/workflows/validate.yml`).
+- **Validator**: duplicate-name check; documented dev dependency (PyYAML/venv) and scope
+  limits. **ersatz**: hardcoded `≤0.25s` micro-transition replaced with
+  platform-conventions/token-derived durations or a test range.
+- Build-mode motion step prefers native transitions; first-run empty-state rule keyed to
+  orientation, illustration optional.
+
 ## v1.2 — 2026-07-27
 
 Hardening pass after an independent audit; architecture and component roles unchanged.

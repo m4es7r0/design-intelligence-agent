@@ -1,0 +1,18 @@
+{
+  "test": "C-cross-platform",
+  "prompt": "Cross-platform synthesis: история разговоров mobile + desktop web; ≤2 поиска; четыре корзины; routingTrace.",
+  "expected": "four buckets; per-platform separation; no literal copying",
+  "researchDecision": "use-repository-evidence",
+  "routingTrace": "routingTrace:\n  entryPoint: design-agent\n  mode: cross-platform-synthesis\n  platformProfile: cross-platform (mobile: high confidence · desktop-web: low confidence, unbuilt)\n  invokedModules: [repo-evidence-scan]\n  skippedModules: [design-scout, mobile-design-patterns, web-platform-reference, ersatz-design]\n  researchDecision: use-repository-evidence · scouts: 0 · freshness: current(repo)/evergreen(model)",
+  "provenanceLabelsObserved": {
+    "REPOSITORY_SOURCE": 3,
+    "MODEL_KNOWLEDGE": 3,
+    "DIRECT": 1,
+    "SYNTHESIS": 3
+  },
+  "verdict": "PASS",
+  "violations": [],
+  "notes": "All four buckets present; combined basis observed (REPOSITORY_SOURCE + MODEL_KNOWLEDGE · SYNTHESIS); gate chose use-repository-evidence with explicit reason (structural split, not a pattern lookup) — 0 searches.",
+  "runner": "claude -p, fresh session, --model sonnet",
+  "resultStatus": "completed (non-empty output; runner exit codes lost to a launcher bug — see SUMMARY)"
+}

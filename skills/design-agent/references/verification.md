@@ -10,8 +10,9 @@
       no accidental accents from inconsistency.
 - [ ] **Hierarchy works** — the intended focal point actually wins; squint test passes.
 - [ ] **Tokens used** — values come from the token map, no magic numbers.
-- [ ] **States coverage** — empty, loading, error, keyboard (mobile), long-content all
-      designed, not implied.
+- [ ] **States coverage** — all states APPLICABLE to this screen and flow are designed,
+      not implied (empty, loading, error, keyboard on mobile, long-content — judged per
+      surface, not demanded universally).
 - [ ] **Navigation integrity** — every screen reachable and leavable; back behavior correct
       for the platform.
 - [ ] **Provenance present, both axes** — key decisions carry evidenceBasis (LIVE_SOURCE /
@@ -46,9 +47,12 @@ Design-system inconsistency / Visual polish / Subjective preference).
 - [ ] **Managed focus order** — dialogs trap and restore focus; route changes move focus.
 - [ ] **Semantics** — landmarks, heading structure, native elements before ARIA.
 - [ ] **Hover-independent** — nothing is reachable only by hover (touch parity).
-- [ ] **Reflow** — key widths verified AND 200% zoom without loss (WCAG 1.4.10).
-- [ ] **Interactive states** — hover / focus / active / disabled / loading present on every
-      interactive element.
+- [ ] **Resize Text** — text usable at 200% zoom (WCAG 1.4.4).
+- [ ] **Reflow** — no two-dimensional scrolling at an equivalent viewport width of 320 CSS
+      px, e.g. 400% zoom on 1280px (WCAG 1.4.10); key intermediate widths verified.
+- [ ] **Interactive states** — all APPLICABLE semantic states are defined per control
+      (hover/focus/active/disabled/loading where they make sense — a link rarely needs
+      loading; a submit button usually needs all five).
 - [ ] **Reduced motion respected** — animations honor prefers-reduced-motion.
 - [ ] **Density degradation** — tables and multi-panel layouts have a designed narrow-
       viewport behavior (cards, priority columns, collapsed panes) — not page-wide

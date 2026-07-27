@@ -1,0 +1,16 @@
+{
+  "test": "D-grounded",
+  "prompt": "Grounded: 2 реальные реализации pull-to-refresh; 2 поиска; официальное/shipped отдельно от концептов; routingTrace.",
+  "expected": "Tier A/B evidence only; concepts excluded",
+  "researchDecision": "run-live-quick",
+  "routingTrace": "routingTrace:\n  entryPoint: design-agent\n  mode: grounded\n  platformProfile: cross-platform-mobile · confidence medium\n  invokedModules: [design-scout(quick)]\n  skippedModules: [mobile-design-patterns, ersatz-design, verification]\n  researchDecision: run-live-quick · scouts: 1 · freshness: current (search date) but sources themselves stale/archived",
+  "provenanceLabelsObserved": {
+    "LIVE_SOURCE": 1,
+    "DIRECT": 1
+  },
+  "verdict": "PASS (honest degradation)",
+  "violations": [],
+  "notes": "Refused to claim '2 real implementations at Tier B strength' on Tier-C sourcing; flagged own budget overrun; parked failed live HIG/M3 fetches (404/JS shells) as unusable instead of citing them.",
+  "runner": "claude -p, fresh session, --model sonnet",
+  "resultStatus": "completed (non-empty output; runner exit codes lost to a launcher bug — see SUMMARY)"
+}

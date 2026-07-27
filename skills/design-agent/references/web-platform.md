@@ -36,7 +36,10 @@
 - Container strategy: max content width for reading surfaces; fluid for data surfaces.
 - Content priority on narrow viewports: decide what collapses, stacks, or hides — in that
   order of preference (hiding is last).
-- **Zoom to 200% without loss of content or function** (WCAG 1.4.10 reflow).
+- **Resize Text:** text remains usable at 200% zoom (WCAG 1.4.4). **Reflow:** no
+  two-dimensional scrolling at an equivalent viewport width of 320 CSS px — e.g. 400% zoom
+  on a 1280px viewport (or height 256 CSS px for horizontally scrolled content)
+  (WCAG 1.4.10).
 
 ## Input methods
 

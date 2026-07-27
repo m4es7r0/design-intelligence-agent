@@ -50,9 +50,9 @@ Dynamic Type / user font scaling, and judge captions by legibility in context.
 **Confidence:** high for the direction, medium for exact cutoffs.
 
 ### Empty states, two kinds
-**Prefer** distinct first-run (illustration + one-line title + short explanation + primary
-action emphasized) and no-results (acknowledge the query + suggest correction + exit action)
-states.
+**Prefer** distinct first-run (orient: what this place is + point to the next action;
+an illustration is optional, orientation is the requirement) and no-results (acknowledge
+the query + suggest correction + exit action) states.
 **Scope:** any collection/search surface. **Evidence:** usability heuristic. **Confidence:**
 high.
 
@@ -161,8 +161,9 @@ Work in order — each step constrains the next:
    watch card nesting.
 4. **States** — first-run empty, no-results, keyboard-open for every relevant screen.
    These are screens, not afterthoughts.
-5. **Motion & gestures** — back-swipe parallax, sheet transitions, long-press behavior,
-   how contextual actions animate in/out.
+5. **Motion & gestures** — prefer native navigation transitions (system back behavior
+   comes free); sheet transitions, long-press accelerators (each with a visible
+   alternative), how contextual actions animate in/out.
 6. **Values** — apply the project's design system first. If none exists, you may borrow
    from `references/examples/notely-ios-dark-reference.md` as inspiration — always stating
    it is one example product, not a standard.

@@ -1,0 +1,19 @@
+{
+  "test": "E-explore",
+  "prompt": "Explore: 3 направления для экрана статистики привычек, mobile; ≤1 поиск; evidenceBasis+derivation на каждом; routingTrace.",
+  "expected": "every direction labeled; unshipped ideas = derivation: SPECULATION",
+  "researchDecision": "run-live-quick",
+  "routingTrace": "routingTrace:\n  entryPoint: design-agent\n  mode: explore\n  platformProfile: cross-platform-mobile · confidence: high\n  invokedModules: [platform-router, context-interpreter, WebSearch(1)]\n  skippedModules: [design-scout, mobile-design-patterns, ersatz-design, verification]\n  researchDecision: run-live-quick · scouts: 0 (прямой поиск вместо scout, бюджет 1 запрос) · freshness: current",
+  "provenanceLabelsObserved": {
+    "LIVE_SOURCE": 2,
+    "MODEL_KNOWLEDGE": 1,
+    "DIRECT": 1,
+    "SYNTHESIS": 1,
+    "SPECULATION": 1
+  },
+  "verdict": "PASS",
+  "violations": [],
+  "notes": "Speculative direction honestly labeled MODEL_KNOWLEDGE · SPECULATION with 'no direct precedents found'.",
+  "runner": "claude -p, fresh session, --model sonnet",
+  "resultStatus": "completed (non-empty output; runner exit codes lost to a launcher bug — see SUMMARY)"
+}

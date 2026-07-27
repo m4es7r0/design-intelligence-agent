@@ -1,0 +1,20 @@
+{
+  "test": "B-web",
+  "prompt": "Responsive web история AI-сессий (Next.js): URL state, focus, keyboard nav, reflow; 1 quick-скаут (2 поиска); спека без кода; routingTrace + researchDecision.",
+  "expected": "responsive-web; run-live-quick; web module engaged; mobile skipped",
+  "researchDecision": "run-live-quick",
+  "routingTrace": "routingTrace:\n  entryPoint: design-agent\n  mode: hybrid (user-constrained research budget)\n  platformProfile: responsive-web (Next.js) · confidence: medium\n  invokedModules: [design-scout(quick, 2 searches)]\n  skippedModules: [mobile-design-patterns, ersatz-design, generation/prototype stage — не запрошены (нет full-code), platform-specific figma tooling]\n  researchDecision: run-live-quick · scouts: 1 · freshness: current",
+  "provenanceLabelsObserved": {
+    "LIVE_SOURCE": 1,
+    "MODEL_KNOWLEDGE": 1,
+    "DIRECT": 1,
+    "SYNTHESIS": 1
+  },
+  "verdict": "PASS with 1 scope deviation",
+  "violations": [
+    "ersatz-design stage skipped by session's scope decision ('спека без кода' treated as orchestrator work) — generation stage not exercised in this run; its research_summary gate verified separately (G3, in-session v1.1 tests)."
+  ],
+  "notes": "Web concerns engaged: APG x3, listbox, URL/focus/keyboard/reflow x14 mentions.",
+  "runner": "claude -p, fresh session, --model sonnet",
+  "resultStatus": "completed (non-empty output; runner exit codes lost to a launcher bug — see SUMMARY)"
+}

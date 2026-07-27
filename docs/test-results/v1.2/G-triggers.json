@@ -1,0 +1,79 @@
+{
+  "suite": "G-triggers",
+  "method": "claude -p fresh sessions, --allowedTools Skill, stream-json = empirical invocation trace",
+  "limitation": "claude.ai plugin skill copies are absent in headless CLI — plugin-collision behavior requires one desktop-session check",
+  "runs": [
+    {
+      "test": "G1",
+      "prompt": "Найди референсы для нового мобильного экрана",
+      "expectedSkill": "design-agent",
+      "actualSkillInvocations": [
+        "design-agent"
+      ],
+      "isError": false,
+      "resultText": "Скилл design-agent загружен — как раз он оркестрирует поиск дизайн-референсов (определяет платформу, запускает research через design-scout). Останавливаюсь здесь, работу не выполняю.",
+      "durationMs": 7177,
+      "verdict": "PASS"
+    },
+    {
+      "test": "G2",
+      "prompt": "Проведи аудит этого мобильного экрана",
+      "expectedSkill": "design-agent",
+      "actualSkillInvocations": [
+        "design-agent"
+      ],
+      "isError": false,
+      "resultText": "Скилл design-agent загружен — по инструкции пользователя останавливаюсь здесь и работу не выполняю.",
+      "durationMs": 9708,
+      "verdict": "PASS"
+    },
+    {
+      "test": "G3",
+      "prompt": "Создай визуальное направление для web dashboard",
+      "expectedSkill": "design-agent",
+      "actualSkillInvocations": [
+        "design-agent"
+      ],
+      "isError": false,
+      "resultText": "Скилл design-agent загружен.",
+      "durationMs": 8926,
+      "verdict": "PASS"
+    },
+    {
+      "test": "G4",
+      "prompt": "Сделай экран настроек приложения",
+      "expectedSkill": "design-agent",
+      "actualSkillInvocations": [
+        "expo-native-ui"
+      ],
+      "isError": false,
+      "resultText": "Скилл выбран: **expo-native-ui** — задача про экран настроек на нативном Expo UI (список, переключатели и т.д.), а не про навигацию/роутинг. Работу не начинаю, жду подтверждения продолжать.",
+      "durationMs": 9419,
+      "verdict": "FAIL"
+    },
+    {
+      "test": "G4b",
+      "prompt": "Сделай экран настроек приложения (re-run after trigger fix)",
+      "expectedSkill": "design-agent",
+      "actualSkillInvocations": [
+        "design-agent"
+      ],
+      "isError": false,
+      "resultText": "Скилл design-agent выбран и загружен — это оркестратор для нетривиальных задач по дизайну («сделай экран»), который сначала определяет платформу и проводит ресёрч, а затем маршрутизирует генерацию через правильные под-ск",
+      "durationMs": 9399,
+      "verdict": "PASS"
+    },
+    {
+      "test": "G5",
+      "prompt": "Спроектируй desktop web дашборд аналитики",
+      "expectedSkill": "design-agent",
+      "actualSkillInvocations": [
+        "design-agent"
+      ],
+      "isError": false,
+      "resultText": "Загружен скилл **design-agent** — это оркестратор для нетривиальных дизайн-задач (\"спроектируй экран/страницу\" прямо входит в его триггеры), который сначала определяет платформенный профиль и проводит research, а уже пот",
+      "durationMs": 14987,
+      "verdict": "PASS"
+    }
+  ]
+}

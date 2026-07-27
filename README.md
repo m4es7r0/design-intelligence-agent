@@ -2,7 +2,7 @@
 
 A research-first design system for Claude Code: it resolves the platform, searches live
 sources (official guidelines + real shipped products), scores the evidence, and only then
-makes design decisions — each labeled SOURCE / SYNTHESIS / SPECULATION / MODEL-KNOWLEDGE.
+makes design decisions — each key decision labeled with evidenceBasis and derivation.
 
 ## Contents
 
@@ -67,7 +67,7 @@ back for override. Details: `skills/design-agent/README.md`.
   REPOSITORY_SOURCE / USER_PROVIDED / MODEL_KNOWLEDGE) × derivation (DIRECT / SYNTHESIS /
   SPECULATION).
 
-## v1 limitations
+## Current limitations (v1.2.1)
 
 Free sources only (no Refero/Mobbin integrations); basic web module (extended
 web-design-patterns skill planned); no per-domain knowledge files yet.

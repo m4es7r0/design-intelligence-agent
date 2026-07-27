@@ -63,8 +63,8 @@ family: web · target: responsive-web
 formFactor: desktop primary, adapts to mobile · inputMethods: mouse, trackpad, keyboard, touch
 navigationEnvironment: browser-history
 screenClasses: mobile, tablet, desktop, wide-desktop
-systemConstraints: responsive-reflow, keyboard-navigation, semantic-html, browser-zoom-200,
-                   reduced-motion, deep-linking
+systemConstraints: responsive-reflow, keyboard-navigation, semantic-html, text-resize-200,
+                   reflow-320-css-px, reduced-motion, deep-linking
 platformSources: WCAG 2.2, WAI-ARIA APG, relevant web design systems
 implementation: Next.js App Router / Tailwind CSS
 ```
@@ -78,11 +78,13 @@ implementation: Next.js App Router / Tailwind CSS
 | Web (any) | WCAG 2.2 + WAI-ARIA APG + relevant web design systems |
 | Enterprise / internal tools | Carbon, Fluent, Atlassian Design System |
 | Shopify-embedded | Polaris |
-| Existing internal design system | **Internal system first by default** — but only while it creates no clear usability, accessibility, or platform conflict; on conflict run the 6-step conflict resolution protocol (SKILL.md, Step 5) |
+| Existing internal design system | **Internal system first by default** — but only while it creates no clear usability, accessibility, or platform conflict; on conflict run the 7-step conflict resolution protocol (SKILL.md, Step 5) |
 
 ## Cross-platform mapping
 
-Same product, different correct answers per platform:
+Same product, different correct answers per platform. These are **common tendencies —
+direction defaults, not correct answers for every product**; a data-dense mobile pro tool
+or a keyboard-first mobile editor legitimately breaks them:
 
 | Part | Mobile | Web |
 |---|---|---|

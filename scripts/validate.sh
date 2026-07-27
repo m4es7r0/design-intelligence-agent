@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 # Frontmatter + reference-path validator for the design-intelligence-agent bundle.
 # Usage: scripts/validate.sh [ROOT]   (default ROOT = repo root)
-# Exit non-zero on: invalid YAML, missing required fields, missing reference paths.
+# Exit non-zero on: invalid YAML, missing required fields, missing relative reference
+# paths, duplicate skill/agent names.
+# Dev dependency: PyYAML — if the system python3 lacks it, a venv is created in
+# scripts/.venv and pyyaml is installed FROM THE NETWORK (documented behavior).
+# Scope limits (deliberate): does NOT check docs/ links, absolute ~/.claude references,
+# frontmatter field types beyond presence, trigger collisions, or evidence enum values.
 set -u
 ROOT="${1:-$(cd "$(dirname "$0")/.." && pwd)}"
 PY=python3
@@ -41,6 +46,7 @@ if not targets:
     print(f"FATAL: no targets found under {root}")
     sys.exit(2)
 
+seen_names = {}
 for path in targets:
     rel = os.path.relpath(path, root)
     checked += 1
@@ -58,6 +64,11 @@ for path in targets:
     for field in required:
         if field not in data or data[field] in (None, ""):
             failures.append(f"{rel}: missing required field '{field}'")
+    name = data.get("name")
+    if name:
+        if name in seen_names:
+            failures.append(f"{rel}: duplicate name '{name}' (also in {seen_names[name]})")
+        seen_names[name] = rel
     # reference paths mentioned in the body must exist relative to the file's directory;
     # a leading '/' means it's a segment of a longer (absolute/cross-file) path — skip those
     base = os.path.dirname(path)
