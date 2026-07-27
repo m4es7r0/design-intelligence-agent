@@ -59,6 +59,21 @@ Name a mode (explore / grounded / hybrid / audit / prototype / cross-platform-sy
 and platform explicitly when you want control; otherwise they are auto-detected and echoed
 back for override. Details: `skills/design-agent/README.md`.
 
+### Быстрый тест агента на существующем проекте
+
+Запустите Claude Code из корня проекта и отправьте:
+
+> Работай через design-agent. Изучи этот проект, определи платформу и существующие функции.
+> Проведи аудит основного пользовательского flow, найди несколько актуальных реальных
+> референсов, предложи 2–3 направления улучшения и выбери одно. Создай research_summary,
+> реализуй выбранное решение как изолированный prototype, не удаляя текущий UI, затем
+> выполни platform verification. В конце покажи изменённые файлы, команды запуска и
+> routingTrace.
+
+Такой запрос проверяет основную цепочку:
+
+`repository → platform routing → audit → research → synthesis → prototype → verification`.
+
 ## Invariants
 
 - Platform resolves before research; mobile and web references never mix silently.
